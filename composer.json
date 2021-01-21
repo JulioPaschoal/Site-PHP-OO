@@ -1,0 +1,17 @@
+{
+  "name": "vendor-name/phpoo",
+  "description": "PHP Orientado a Objetos com PDO e MVC",
+  "authors": [
+    {
+      "name": "Julio Paschoal",
+      "email": "juliocpaschoal@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Core\\" : "core",
+      "Sts\\" : "app/sts"
+    }
+  },
+  "require": {}
+}
