@@ -3,7 +3,7 @@
 
 namespace Sts\Controllers;
 
-if (!define('URL')) {
+if (!defined('URL')) {
     header("Location: /");
     exit();
 }

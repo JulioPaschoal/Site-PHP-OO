@@ -1,3 +1,7 @@
 <?php
-
-echo "View HOME <br>";
+if (!defined('URL')) {
+    header("Location: /");
+    exit();
+}
+//echo "View HOME  <br>";
+var_dump($this->Dados);
