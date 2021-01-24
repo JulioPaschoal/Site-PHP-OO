@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Sts\Models\helper;
 
 use PDO;
@@ -12,13 +11,14 @@ if (!defined('URL')) {
 
 class StsRead extends StsConn
 {
+
     private $Select;
     private $Values;
     private $Resultado;
     private $Query;
     private $Conn;
 
-    public function getResultado()
+    function getResultado()
     {
         return $this->Resultado;
     }
@@ -29,23 +29,24 @@ class StsRead extends StsConn
             parse_str($ParseString, $this->Values);
         }
         $this->Select = "SELECT * FROM {$Tabela} {$Termos}";
-        $this->exeInstruction();
+       // echo "{$this->Select}";
+        $this->exeInstrucao();
     }
 
     public function fullRead($Query, $ParseString = null)
     {
-        $this->Select = (string)$Query;
+        $this->Select = (string) $Query;
         if (!empty($ParseString)) {
             parse_str($ParseString, $this->Values);
         }
         $this->exeInstrucao();
     }
 
-    private function exeInstruction()
+    private function exeInstrucao()
     {
         $this->conexao();
         try {
-            $this->getInstruction();
+            $this->getIntrucao();
             $this->Query->execute();
             $this->Resultado = $this->Query->fetchAll();
         } catch (Exception $ex) {
@@ -60,15 +61,16 @@ class StsRead extends StsConn
         $this->Query->setFetchMode(PDO::FETCH_ASSOC);
     }
 
-    private function getInstruction()
+    private function getIntrucao()
     {
         if ($this->Values) {
-            foreach ($this->Values as $link => $value) {
-                if ($link == 'limit' || $link == 'offet') {
-                    $value = (int)$value;
+            foreach ($this->Values as $Link => $Valor) {
+                if ($Link == 'limit' || $Link == 'offset') {
+                    $Valor = (int) $Valor;
                 }
-                $this->Query->bindValue(":{$link}", $value, (is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR));
+                $this->Query->bindValue(":{$Link}", $Valor, (is_int($Valor) ? PDO::PARAM_INT : PDO::PARAM_STR));
             }
         }
     }
+
 }
